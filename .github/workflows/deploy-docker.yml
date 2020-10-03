@@ -27,11 +27,11 @@ jobs:
       - uses: actions/checkout@v1
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_HUB_USER }}
-          -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          -p ${{ secrets.DOCKER_HUB_PASS }}
       - name: Build Docker image
-        run: docker build -t wherbawi/spring-app:latest .
+        run: docker build -t ppuyafa/yafa-app:latest .
       - name: Publish Docker image
-        run: docker push wherbawi/spring-app
+        run: docker push ppuyafa/yafa-app
 
   redeploy:
     needs: [docker]
@@ -41,10 +41,10 @@ jobs:
         uses: fifsky/ssh-action@master
         with: 
          command: |
-          docker pull wherbawi/spring-app:latest
-          docker stop SpringApp
+          docker pull ppuyafa/yafa-app:latest
+          docker stop YafaApp
           docker system prune -f
-          docker run -d -p 8080:8080 --name SpringApp wherbawi/spring-app:latest
+          docker run -d -p 5050:8080 --name YafaApp ppuyafa/yafa-app:latest
          host: ${{ secrets.STAGING_SERVER_IP }}
          user: ${{ secrets.STAGING_SERVER_DEPLOY_USR }}
          key: ${{ secrets.STAGING_SERVER_KEY }}
