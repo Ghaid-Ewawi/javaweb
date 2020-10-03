@@ -1,0 +1,33 @@
+To build an image from current directory:
+
+Current directory must inclue docker file>> The one we used had the following commands
+FROM nginx
+COPY index.html /usr/share/nginx/html/
+-------------------------------------------------------------
+
+docker build -t ppuyafa/our_web .
+docker login -u name -p password    = or space
+docker push ppuyafa/our_web
+
+
+To run on specific port
+docker run -d -p 80:80 imageName
+
+To stop running container:
+docker stop (id|name)
+
+To list running containers:
+docker ps
+
+To list running images:
+docker images
+
+
+To list all containers history:
+docker ps -a
+
+
+Put 
+@RestController
+
+@GetMapping('/v1/sum")
